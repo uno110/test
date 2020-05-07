@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+</head>
+<body>
+計算式
+<th:text="${msg}">
+<form th:objext="${form}" th:method="post" th:action="@{/new}">
+日付ID <input  type="text"  name="word"  th:value="${word}" ><br>
+
+名前<input type="text"  name="name" th:value="${name}"><br>
+加減(Y)<input type="text"  name="year" th:value="${year}"><br>
+加減(M)<input type="text"  name="month" th:value="${month}"><br>
+加減(D)<input type="text"  name="day" th:value="${day}"><br>
+<button type="submit">登録</button>
+</form>
+日付
+<form method="post" th:action="@{/calculate}" th:object="${date}"
+><input type="datetime"   placeholder="yyyy/MM/dd" name="d" th:value="${d}">
+
+<button value="submit">実行</button>
+</form>
+<td th:text="${result}"></td>
+<table>
+<tr >
+<td>no.</td>
+<td>日付ID</td>
+<td>名前</td>
+<td >結果</td>
+<td >加減(Y/M/D)</td>
+</tr>
+<tr  th:each="obj:${R}" th:object="${obj}">
+<td th:text="*{no}"></td>
+<td th:text="*{word}" ></td>
+<td th:text="*{name}"></td>
+<td th:text="*{d1}" ></td>
+<td  th:text="|*{year}/*{month}/*{day}|">
+<td><form method="get"  th:action="@{/edit/{word}(word=*{word})}">
+<button value="submit">更新</button></form></td>
+<td><form method="post" th:action="@{/delete/{word}(word=*{word})}">
+<button value="submit">削除</button>
+</form></td>
+</table>
+</body>
+</html>
