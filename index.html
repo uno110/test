@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/css/bootstrap.min.css" />
+	<title>業務日付</title>
+</head>
+<body>
+	<nav class="navbar navbar-inverse">
+		<div class="container">
+			<div class="navbar-header">
+				日付
+<form method="post" th:action="@{/calculate}" th:object="${date}"
+><input type="datetime"   placeholder="yyyy/MM/dd" name="d" th:value="${d}">
+
+<button class="btn btn-primary" value="submit">実行</button>
+</form>
+			</div>
+		</div>
+    </nav>
+	<div class="container">
+		<div class="card card-primary mb-3">
+  			<div class="card-header">
+  				<h5 class="card-title"><a href="/insert" mathod="get" class="btn btn-success float-right">新規登録</a></h5>
+  			</div>
+  			
+   			<table class="table table-striped" >
+     			<thead>
+       				<tr>
+         				<th style="width: 8%">No</th>
+         				<th style="width: 20%">日付ID</th>
+         				<th style="width: 25%">結果</th>
+         				<th style="width: 20%">年/月/日</th>
+         			
+       				</tr>
+     			</thead>
+     			<tbody>
+       				<tr th:each="obj:${R}" th:object="${obj}">
+         				<td th:text="*{no}"></td>
+         				<td th:text="*{word}"></td>
+         				<td th:text="*{d1}"></td>
+         				<td th:text="|*{year}/*{month}/*{day}|"></td>
+         				<td class="float-right">
+	         				<td><form th:action="@{/edit/{word}(word=*{word})}" th:method="get">
+	         					<button class="btn btn-primary">更新</button>
+	         					</form><td>
+	         				<td><form th:action="@{/delete/{word}(word=*{word})}" th:method="post">	
+	         					<button class="btn btn-primary">削除</button><td>
+	         				
+							</form>
+         				</td>
+       				</tr>
+     			</tbody>
+   			</table>
+  		</div>
+	</div>
+ 	<script src="/js/jquery-3.5.0.min"></script>
+	<script src="/js/bootstrap.min.js"></script>
+</body>
+</html>
