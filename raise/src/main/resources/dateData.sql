@@ -1,0 +1,1 @@
+INSERT INTO date (no,word,year,month,day) VALUES　(1,"明日",0,0,1);
